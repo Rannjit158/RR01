@@ -7,36 +7,30 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+
+    public function create()
+    {
+        return view('post');
+    }
+
+
     public function userDetail(Request $request)
     {
-        // Get input from request or use default values
-        $name = $request->name ;
-        $email = $request->email ;
-        $password = $request->password;
 
-        // Create a new record
-        $createdUser = Post::create([
-            'name' => 'promod',
-            'email' => 'promod@gmail.com',
-            'password' => 123
+        Post::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
         ]);
 
-        // Get all records
-        $allUsers = Post::all();
-
-        // Display all users
-        foreach($allUsers as $user) {
-         echo "Name: {$user->name}, Email: {$user->email}<br>";
-        }
+        // Redirect to show all users
+        return redirect()->route('showDetail')->with('success', 'User added successfully!');
     }
-    public function deleteUser()
+
+    // Display all users
+    public function showDetail()
     {
-        $deleted = Post::destroy(24);
-        if($deleted) {
-            return "Deleted successfully!";
-        } else {
-            return "No record found for deletion.";
-        }
+        $details = Post::all();
+        return view('show', compact('details')); // Your show view
     }
-
 }

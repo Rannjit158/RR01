@@ -32,23 +32,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-Route::get('/post',[PostController::class,'userDetail'])->name('post');
-Route::get('/delete',[PostController::class,'deleteUser'])->name('delete');
-Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware('role:admin');
-Route::get('/customer/dashboard', [CustomerController::class, 'index'])->middleware('role:customer');
+Route::get('/post', [PostController::class, 'create'])->name('post.create');
+Route::post('/post', [PostController::class, 'userDetail'])->name('post.store');
+Route::get('/show', [PostController::class, 'showDetail'])->name('showDetail');
 
-Route::get('/', function () {
-    return view('dashboards.guest'); // Public dashboard
-})->name('guest.dashboard');
 
-// Authenticated routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/admin', function () {
-        return view('dashboards.admin');
-    })->middleware('role:admin')->name('admin.dashboard');
-
-    Route::get('/customer', function () {
-        return view('dashboards.customer');
-    })->middleware('role:customer')->name('customer.dashboard');
-}
-);
