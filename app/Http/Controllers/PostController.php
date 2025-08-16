@@ -14,8 +14,13 @@ class PostController extends Controller
     }
 
 
-    public function userDetail(Request $request)
+    public function store(Request $request)
     {
+         $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:posts,email',
+            'password' => 'required|min:6',
+         ]);
 
         Post::create([
             'name' => $request->name,
@@ -23,14 +28,14 @@ class PostController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        // Redirect to show all users
+
         return redirect()->route('showDetail')->with('success', 'User added successfully!');
     }
 
-    // Display all users
+
     public function showDetail()
     {
         $details = Post::all();
-        return view('show', compact('details')); // Your show view
+        return view('show', compact('details'));
     }
 }

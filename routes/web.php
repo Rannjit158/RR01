@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 Route::get('/post', [PostController::class, 'create'])->name('post.create');
-Route::post('/post', [PostController::class, 'userDetail'])->name('post.store');
+Route::post('/post', [PostController::class, 'store'])->name('post.store');
 Route::get('/show', [PostController::class, 'showDetail'])->name('showDetail');
 
 
