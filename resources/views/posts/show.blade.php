@@ -8,7 +8,7 @@
         <p><strong>ID:</strong> {{ $post->id }}</p>
         <p><strong>Name:</strong> {{ $post->name }}</p>
         <p><strong>Email:</strong> {{ $post->email }}</p>
-        <p><strong>Created At:</strong> {{ $post->created }}</p>
+        <p><strong>Created At:</strong> {{ $post->created_at}}</p>
     </div>
 
     <div class="mt-6 flex space-x-2">
