@@ -33,7 +33,7 @@ class PostController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->route('post.index', compact('posts'))->with('success', ' created successfully.');
+        return redirect()->route('posts.index', compact('posts'))->with('success', ' created successfully.');
     }
 
     public function show(Post $post)
